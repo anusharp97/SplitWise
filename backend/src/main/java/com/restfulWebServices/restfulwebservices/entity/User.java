@@ -1,20 +1,46 @@
 package com.restfulWebServices.restfulwebservices.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-//@Entity
+@Entity
 public class User {
 	
-//	@Id
-//	@GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
-	
 	private String name;
 	private String email;
+	@OneToMany(mappedBy = "payer")
+	private List<Item> items = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name="USER_GROUP",
+	joinColumns = @JoinColumn(name="USER_ID"),
+	inverseJoinColumns = @JoinColumn(name="GROUP_ID")
+	)
+	private List<Groups> groups= new ArrayList<>();
+	
+	@OneToMany(mappedBy = "owner")
+	private List<Bill> bills = new ArrayList<>();
+	
+	
+	
+	@Column(columnDefinition="Decimal(10,2) default '0.0'")
 	private float balance;
+	@Column(columnDefinition="Decimal(10,2) default '0.0'")
 	private float owed;
+	@Column(columnDefinition="Decimal(10,2) default '0.0'")
 	private float owes;
 	public Long getId() {
 		return id;
@@ -64,6 +90,12 @@ public class User {
 		this.balance = balance;
 		this.owed = owed;
 		this.owes = owes;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", balance=" + balance + ", owed=" + owed
+				+ ", owes=" + owes + "]";
 	}
 	
 
