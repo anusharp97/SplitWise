@@ -1,7 +1,7 @@
-insert into user(id, name, email) values (10001,'Anusha','anusha@juniper.net');
-insert into user(id, name, email) values (10002,'Totu','totu@juniper.net');
-insert into user(id, name, email) values (10003,'Chintu','chintu@juniper.net');
-insert into user(id, name, email) values (10004,'Rupa','rupa@juniper.net');
+insert into user(id, name, email) values (10001,'Anusha','anusha@gmail.com');
+insert into user(id, name, email) values (10002,'Totu','totu@gmail.com');
+insert into user(id, name, email) values (10003,'Chintu','chintu@gmail.com');
+insert into user(id, name, email) values (10004,'Rupa','rupa@gmail.com');
 
 insert into groups(id,name,description) values (50001,'We','Outing');
 insert into groups(id,name,description) values (50002,'Roomies','Lunch');

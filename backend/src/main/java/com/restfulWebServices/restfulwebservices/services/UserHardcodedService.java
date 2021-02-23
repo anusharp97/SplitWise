@@ -1,9 +1,11 @@
-package com.restfulWebServices.restfulwebservices.entity;
+package com.restfulWebServices.restfulwebservices.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.restfulWebServices.restfulwebservices.entity.User;
 
 @Service
 public class UserHardcodedService {
@@ -17,5 +19,10 @@ public class UserHardcodedService {
 	}
 	public List<User> findAll() {
 		return users;
+	}
+	public User findUserById(Long id) {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 }
