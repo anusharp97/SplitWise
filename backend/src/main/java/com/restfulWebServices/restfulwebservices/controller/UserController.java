@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.restfulWebServices.restfulwebservices.entity.User;
-import com.restfulWebServices.restfulwebservices.repository.UserRepository;
+import com.restfulWebServices.restfulwebservices.services.interfaces.IUserService;
 
 
 @RestController
@@ -25,7 +26,7 @@ public class UserController {
 //	private UserHardcodedService userService;
 	
 	@Autowired
-	private UserRepository userJPAService;
+	private IUserService userJPAService;
 	
 	@GetMapping(path="/users")
 	public List<User> getAllUsers()
@@ -45,6 +46,7 @@ public class UserController {
 	public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user)
 	{
 		//user.setName(user.getName());
+		@SuppressWarnings("unused")
 		User updated = userJPAService.save(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 		//return userService.findUserById(id);
@@ -58,5 +60,16 @@ public class UserController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUser.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@DeleteMapping(path="/users/{Id}/bills")
+	public ResponseEntity<Void> deleteUser(@PathVariable Long Id)
+	{
+		//user.setName(user.getName());
+		//User newUser = userJPAService.save(user);
+		userJPAService.deleteById(Id);
+		return ResponseEntity.notFound().build();
+	}
+
+	
 
 }

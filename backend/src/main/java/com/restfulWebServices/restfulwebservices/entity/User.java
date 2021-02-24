@@ -2,7 +2,6 @@ package com.restfulWebServices.restfulwebservices.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,14 +12,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause="is_deleted=0")
 public class User {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	private String name;
 	private String email;
+	
+	@Column(columnDefinition="tinyint(1) default 0")
+	private boolean isDeleted;
+	
 	@OneToMany(mappedBy = "payer")
 	private List<Item> items = new ArrayList<>();
 	
@@ -79,10 +86,38 @@ public class User {
 		this.owes = owes;
 	}
 	
+//	public List<Item> getItems() {
+//		return items;
+//	}
+//	public void setItems(List<Item> items) {
+//		this.items = items;
+//	}
+//	public List<Groups> getGroups() {
+//		return groups;
+//	}
+//	public void setGroups(List<Groups> groups) {
+//		this.groups = groups;
+//	}
+//	public List<Bill> getBills() {
+//		return bills;
+//	}
+//	public void setBills(List<Bill> bills) {
+//		this.bills = bills;
+//	}
+//	
 	protected User() {
 		
 	}
-	public User(Long id, String name, String email, float balance, float owed, float owes) {
+	
+	public User(Long id, String name, String email)
+	{
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		
+	}
+	public User(Long id, String name, String email, float balance, float owed, float owes, boolean isDeleted) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -90,13 +125,21 @@ public class User {
 		this.balance = balance;
 		this.owed = owed;
 		this.owes = owes;
+		this.isDeleted = isDeleted;
 	}
 	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", balance=" + balance + ", owed=" + owed
-				+ ", owes=" + owes + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", isDeleted=" + isDeleted + ", balance="
+				+ balance + "]";
 	}
+	
 	
 
 }

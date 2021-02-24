@@ -2,9 +2,7 @@ package com.restfulWebServices.restfulwebservices.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,10 +16,21 @@ public class Groups {
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	private String name;
+	private String description;
 	
 	
-	@OneToMany(mappedBy = "group")
-	private List<Bill> bills = new ArrayList<>();
+//	public List<Bill> getBills() {
+//		return bills;
+//	}
+//	public void setBills(List<Bill> bills) {
+//		this.bills = bills;
+//	}
+
+
+//	@OneToMany(mappedBy = "group")
+//	private List<Bill> bills = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "groups")
 	private List<User> users= new ArrayList<>();
@@ -30,8 +39,6 @@ public class Groups {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", description=" + description +  "]";
 	}
-	private String name;
-	private String description;
 	
 	public Long getId() {
 		return id;
@@ -45,21 +52,28 @@ public class Groups {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
+	public String getDescription() {
 		return description;
 	}
-	public void setEmail(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
+	public List<User> getUsers() {
+		return users;
+	}
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
 	
 	protected Groups() {
 		
 	}
-	public Groups(Long id, String name, String description) {
+	public Groups(Long id, String name, String description,List<User> users) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		//this.users = users;
 	}
 	
 
