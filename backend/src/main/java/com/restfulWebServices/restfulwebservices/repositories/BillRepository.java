@@ -1,4 +1,4 @@
-package com.restfulWebServices.restfulwebservices.services.interfaces;
+package com.restfulWebServices.restfulwebservices.repositories;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.restfulWebServices.restfulwebservices.entity.Bill;
 
 @Repository
-public interface IBillService extends JpaRepository<Bill, Long>{
+public interface BillRepository extends JpaRepository<Bill, Long>{
 	List<Bill> findByOwnerId(Long owner_id);
 	List<Bill> findByGroupId(Long group_id);
 }

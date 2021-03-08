@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.restfulWebServices.restfulwebservices.entity.User;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IUserService;
+import com.restfulWebServices.restfulwebservices.repositories.UserRepository;
 
 
 @RestController
@@ -26,7 +26,7 @@ public class UserController {
 //	private UserHardcodedService userService;
 	
 	@Autowired
-	private IUserService userJPAService;
+	private UserRepository userJPAService;
 	
 	@GetMapping(path="/users")
 	public List<User> getAllUsers()

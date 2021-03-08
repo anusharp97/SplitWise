@@ -14,8 +14,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.restfulWebServices.restfulwebservices.entity.Groups;
 import com.restfulWebServices.restfulwebservices.entity.User;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IGroupService;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IUserService;
+import com.restfulWebServices.restfulwebservices.repositories.GroupRepository;
+import com.restfulWebServices.restfulwebservices.repositories.UserRepository;
 
 
 @RestController
@@ -25,9 +25,9 @@ public class GroupController {
 //	private UserHardcodedService userService;
 	
 	@Autowired
-	private IGroupService groupJPAService;
+	private GroupRepository groupJPAService;
 	@Autowired
-	private IUserService userJPAService;
+	private UserRepository userJPAService;
 	
 	@GetMapping(path="/groups")
 	public List<Groups> getAllUsers()

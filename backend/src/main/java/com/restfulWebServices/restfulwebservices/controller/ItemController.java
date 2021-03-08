@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.restfulWebServices.restfulwebservices.entity.Item;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IItemService;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IUserService;
+import com.restfulWebServices.restfulwebservices.repositories.ItemRepository;
+import com.restfulWebServices.restfulwebservices.repositories.UserRepository;
 
 
 @RestController
 public class ItemController {
 	
 	@Autowired
-	private IUserService userJPAService;
+	private UserRepository userJPAService;
 	
 	@Autowired
-	private IItemService itemJPAService;
+	private ItemRepository itemJPAService;
 	
 	@GetMapping(path="/items")
 	public List<Item> getAllItems()

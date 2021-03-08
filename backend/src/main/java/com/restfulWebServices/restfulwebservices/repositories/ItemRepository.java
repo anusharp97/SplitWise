@@ -1,4 +1,4 @@
-package com.restfulWebServices.restfulwebservices.services.interfaces;
+package com.restfulWebServices.restfulwebservices.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.restfulWebServices.restfulwebservices.entity.Item;
 
 @Repository
-public interface IItemService extends JpaRepository<Item, Long>{
+public interface ItemRepository extends JpaRepository<Item, Long>{
 //	
 //	@Modifying
 //    @Query("update User user set is_deleted = true where Id = :Id")

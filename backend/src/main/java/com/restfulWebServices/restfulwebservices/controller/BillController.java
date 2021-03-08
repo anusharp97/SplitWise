@@ -16,27 +16,27 @@ import com.restfulWebServices.restfulwebservices.entity.Bill;
 import com.restfulWebServices.restfulwebservices.entity.Groups;
 import com.restfulWebServices.restfulwebservices.entity.Item;
 import com.restfulWebServices.restfulwebservices.entity.User;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IBillService;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IGroupService;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IItemService;
-import com.restfulWebServices.restfulwebservices.services.interfaces.IUserService;
+import com.restfulWebServices.restfulwebservices.repositories.BillRepository;
+import com.restfulWebServices.restfulwebservices.repositories.GroupRepository;
+import com.restfulWebServices.restfulwebservices.repositories.ItemRepository;
+import com.restfulWebServices.restfulwebservices.repositories.UserRepository;
 
 @RestController
 public class BillController 
 {
 	@Autowired
-	private IBillService billJPAService;
+	private BillRepository billJPAService;
 	
 	//private ICustomUserService userJPAservice;
 	
 	@Autowired
-	private IUserService userJPAService;
+	private UserRepository userJPAService;
 	
 	@Autowired
-	private IItemService itemJPAService;
+	private ItemRepository itemJPAService;
 	
 	@Autowired
-	private IGroupService groupJPAService;
+	private GroupRepository groupJPAService;
 	
 	
 //	@GetMapping(path="/bills")

@@ -21,15 +21,32 @@ public class Bill {
 	@GeneratedValue
 	private Long id;
 	private Date date;
+
+	@ManyToOne
+	private Groups group;
 	
-	//@JsonManagedReference()
-	//@JsonIgnore
+
+	@ManyToOne
+	private User owner;
+	
 	@OneToMany(mappedBy = "bill")
 	private List<Item> items = new ArrayList<>();
 	
 	@Formula(value="select sum(item.cost) from item where item.bill_id=id")
 	private float amount;
 	
+//	@Formula(value="select count(user_group.group_id) from user_group, bill where user_group.group_id = bill.group_id and bill.id=id")
+	
+	@Formula("select count(user_group.user_id) from user_group where group_id = user_group.group_id and id=id")
+	private int numOfPeople;
+	
+//	private float individualAmount;
+//	
+//	
+//	public void setIndividualAmount() {
+//		this.individualAmount = this.amount/this.numOfPeople;
+//	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -47,9 +64,6 @@ public class Bill {
 		this.items = items;
 	}
 
-	@ManyToOne
-	private Groups group;
-
 	public Groups getGroup() {
 		return group;
 	}
@@ -58,8 +72,6 @@ public class Bill {
 		this.group = group;
 	}
 
-	@ManyToOne
-	private User owner;
 	
 	public void setDate(Date date) {
 		this.date = date;
@@ -67,10 +79,11 @@ public class Bill {
 	public float getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
 	
+	public float getNumOfPeople() {
+		return numOfPeople;
+	}
+
 	protected Bill()
 	{
 		
