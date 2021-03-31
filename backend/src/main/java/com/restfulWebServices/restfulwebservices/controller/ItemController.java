@@ -4,18 +4,16 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.restfulWebServices.restfulwebservices.entity.Item;
+import com.restfulWebServices.restfulwebservices.repositories.BalanceRepository;
 import com.restfulWebServices.restfulwebservices.repositories.ItemRepository;
 import com.restfulWebServices.restfulwebservices.repositories.UserRepository;
 
@@ -28,6 +26,9 @@ public class ItemController {
 	
 	@Autowired
 	private ItemRepository itemJPAService;
+	
+	@Autowired
+	private BalanceRepository balanceJPAService;
 	
 	@GetMapping(path="/items")
 	public List<Item> getAllItems()

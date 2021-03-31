@@ -29,56 +29,50 @@ public class BillController
 	
 	//private ICustomUserService userJPAservice;
 	
-	@Autowired
-	private UserRepository userJPAService;
-	
-	@Autowired
-	private ItemRepository itemJPAService;
-	
+//	@Autowired
+//	private UserRepository userJPAService;
+//	
+//	@Autowired
+//	private ItemRepository itemJPAService;
+//	
 	@Autowired
 	private GroupRepository groupJPAService;
 	
 	
-//	@GetMapping(path="/bills")
-//	public List<Bill> getAllItems()
-//	{
-//		return billJPAService.findAll();
-//	}
-	
-	
 	@GetMapping(path="users/{userId}/bills")
-	public List<Bill> getAllBillByUserId(@PathVariable Long userId)
+	public Bill getAllBillByUserId(@PathVariable Long id)
 	{
-		return  billJPAService.findByOwnerId(userId);
+		return  billJPAService.findById(id).get();
 	}
 	
 	@PostMapping(path="users/{userId}/bills")
 	public ResponseEntity<Void> createUser(@PathVariable Long userId, @RequestBody Bill bill)
 	{
-		if(bill.getItems()!=null)
-		{
-			for(Item item: bill.getItems())
-			{
-				userJPAService.save(item.fetchUser());
-				Item newItem = itemJPAService.save(item);
-			}
-		}
-		if(bill.getGroup()!=null)
-		{
-			if(bill.getGroup().getUsers()!=null)
-			{
-				for(User user : bill.getGroup().getUsers())
-				{
-					userJPAService.save(user);
-				}
-			}
-		}
+//		if(bill.getItems()!=null)
+//		{
+//			for(Item item: bill.getItems())
+//			{
+//				userJPAService.save(item.fetchUser());
+//				Item newItem = itemJPAService.save(item);
+//			}
+//		}
+//		if(bill.getGroup()!=null)
+//		{
+//			if(bill.getGroup().getUsers()!=null)
+//			{
+//				for(User user : bill.getGroup().getUsers())
+//				{
+//					userJPAService.save(user);
+//				}
+//			}
+//		}
 		
 		Groups newGroup = groupJPAService.save(bill.getGroup());
-		userJPAService.save(bill.getOwner());
+		//userJPAService.save(bill.getOwner());
 		//bill.setOwner(userJPAService.fin);
 		
 		//update bill id in items
+		
 		//implement putmapping method in item  
 		Bill newBill = billJPAService.save(bill);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newBill.getId()).toUri();

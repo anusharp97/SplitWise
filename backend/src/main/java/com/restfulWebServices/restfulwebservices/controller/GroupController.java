@@ -56,10 +56,10 @@ public class GroupController {
 	@PostMapping(path="/groups")
 	public ResponseEntity<Void> createUser(@RequestBody Groups group)
 	{
-		for(User user : group.getUsers())
-		{
-			userJPAService.save(user);
-		}
+//		for(User user : group.getUsers())
+//		{
+//			userJPAService.save(user);
+//		}
 		Groups newGroup = groupJPAService.save(group);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newGroup.getId()).toUri();
 		return ResponseEntity.created(uri).build();

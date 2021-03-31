@@ -9,6 +9,6 @@ import com.restfulWebServices.restfulwebservices.entity.Bill;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long>{
-	List<Bill> findByOwnerId(Long owner_id);
-	List<Bill> findByGroupId(Long group_id);
+	//List<Bill> findByOwnerId(Long owner_id);
+	//List<Bill> findByGroupId(Long group_id);
 }

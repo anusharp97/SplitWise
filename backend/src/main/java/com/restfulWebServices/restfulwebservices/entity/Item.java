@@ -1,15 +1,13 @@
 package com.restfulWebServices.restfulwebservices.entity;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
 @Entity
-//@NamedNativeQuery("SELECT SUM(cost) FROM items where bill_id = :bill.id")
 public class Item 
 {
 	@Id
@@ -21,12 +19,13 @@ public class Item
 	private float cost;
 	
 	@ManyToOne
-	private User payer;
+	@JoinColumn(name = "fk_user_item", referencedColumnName = "id")
+	private User payer; 
 	
-	//@JsonBackReference
-	//@JsonBackReference 
 	@ManyToOne
+	@JoinColumn(name = "fk_bill_item", referencedColumnName = "id")
 	private Bill bill;
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,13 +42,6 @@ public class Item
 	public void setPayer(User payer) {
 		this.payer = payer;
 	}
-//	public Bill getBill() {
-//		return bill;
-//	}
-//	public void setBill(Bill bill) {
-//		this.bill = bill;
-//	}
-	
 	
 	public String getDescription() {
 		return description;
@@ -73,9 +65,5 @@ public class Item
 		this.description = description;
 		this.cost = cost;
 	}
-//	@Override
-//	public String toString() {
-//		return "Item [id=" + id + ", description=" + description + ", cost=" + cost + "]";
-//	}
 
 }
